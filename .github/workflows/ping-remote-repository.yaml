@@ -29,10 +29,9 @@ jobs:
       env:
         # This in forked context really takes more for granted than is reasonable,
         # but there is no way to know how user named his fork of machinekit.github.io
-        REMOTE_REPOSITORY: "$PARSED_USERNAME/machinekit.github.io"
       uses: peter-evans/repository-dispatch@v1
       with:
         token: ${{ secrets.ROBOT_TOKEN }}
-        repository: ${{ env.REMOTE_REPOSITORY }}
+        repository: ${{ env.PARSED_USERNAME }}/machinekit.github.io
         event-type: rebuild-site-now
         client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "authorization": "${{ secrets.DOCUMENTATION_PING_KEYCODE }}", "originating_repository": "${{ env.PARSED_USERNAME }}/${{ env.PARSED_LOCAL_REPOSITORY }}"}'
