@@ -21,8 +21,13 @@ jobs:
         read -ra ARRA <<< "$str"
         echo ::set-env name=PARSED_USERNAME::${ARRA[0]}
         echo ::set-env name=PARSED_LOCAL_REPOSITORY::${ARRA[1]}
-        echo "The Github user handle found: $PARSED_USERNAME, the local repository name: $PARSED_LOCAL_REPOSITORY"
 
+      # Another shell is needed for the environment variables to take effect
+    - name: Print parsed Github handle and repository
+      run: |
+        echo "The Github user handle found: ${{ env.PARSED_USERNAME }}."
+        echo "The local repository name: ${{ env.PARSED_LOCAL_REPOSITORY}}."
+    
     # GitHub Actions unfortunately require that the Repository Dispatch action
     # is authorized by the Personal Access Token, so we are using a robot account
     - name: Signal other repository by a message
