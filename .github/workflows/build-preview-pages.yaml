@@ -70,14 +70,10 @@ jobs:
 
       - name: Copy the newly generated site to output directory
         run: cp -r to_build/_site/* ${{ env.OUTPUT_DIRECTORY }}/build
-
-      - name: Create archive of the build
-        run: |
-          tar -czvf ${{ env.OUTPUT_NAME}}.tar.gz ${{ env.OUTPUT_DIRECTORY }}
       
       - name: Upload the artifact
         uses: actions/upload-artifact@v1
         with:
-          name: ${{ env.OUTPUT_NAME}}.tar.gz
-          path: ./${{ env.OUTPUT_NAME}}.tar.gz
+          name: ${{ env.OUTPUT_NAME}}
+          path: ${{ env.OUTPUT_DIRECTORY}}
 
