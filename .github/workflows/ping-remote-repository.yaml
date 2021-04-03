@@ -19,8 +19,8 @@ jobs:
         str="${{ github.repository }}"
         IFS='/'
         read -ra ARRA <<< "$str"
-        echo ::set-env name=PARSED_USERNAME::${ARRA[0]}
-        echo ::set-env name=PARSED_LOCAL_REPOSITORY::${ARRA[1]}
+        echo "PARSED_USERNAME=${ARRA[0]}" >> ${GITHUB_ENV}
+        echo "PARSED_LOCAL_REPOSITORY=${ARRA[1]}" >> ${GITHUB_ENV}
 
       # Another shell is needed for the environment variables to take effect
     - name: Print parsed Github handle and repository
